@@ -8,13 +8,25 @@
 import os
 import sys
 import platform
+import git
 
-oss= sys.platform
-dist = platform.dist()
+try:
+    oss= sys.platform
+    dist = platform.dist()
+    dirPath = os.getcwd()
+    files = os.listdir(dirPath)
+    files.sort()
+except OSErro:
+    print("Os error. Fatal, quitting!")
 
-dirPath = os.getcwd()
 
-osname = os.name
+if ".git" not in files:
+    print("Not a repo")
 
 print(dirPath)
 print(oss, dist)
+print("Files and subdirectories in %s:\n " %dirPath)
+print(files)
+
+#cd: os.chdir("path")
+
