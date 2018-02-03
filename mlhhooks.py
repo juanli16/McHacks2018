@@ -8,6 +8,20 @@
 import os
 import sys
 import platform
+import json
+import httplib
+
+PORT = '3000'
+HEADER = {"content-type": "application/json"}
+
+url = 'localhost' #change this when the time is right 
+post_fields = {"GIT" : "HOOKS"} #json file, where you put all the json data
+
+def POST(url, post_fields):
+	conn = httplib.HTTPConnection(url,PORT)
+	conn.request('POST', "", json.dumps(post_fields), HEADER)
+	response = conn.getresponse().status
+	print "POST Request: ", response
 from collections import Counter as Counter
 
 try:
@@ -19,8 +33,8 @@ except OSError:
     print("Os error. Fatal, quitting!")
 
 
-if ".git" not in files:
-    print("Not a repo")
+#if ".git" not in files:
+#    print("Not a repo")
 
 #cd: os.chdir("path")
 
@@ -46,5 +60,4 @@ def ext(dirpath):
 
 ext(dirPath)
 
-
-
+POST(url, post_fields)
