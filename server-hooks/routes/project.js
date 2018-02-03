@@ -8,9 +8,16 @@ router.get('/', function(req, res, next) {
     res.templateRender('project/all', 'All projects');
 });
 
-router.get('/view', function(req, res, next) {
-    res.setPath([{name: "Home", url: '/'}, {name: 'Project'}, {name: 'View'}]);
-    res.templateRender('project/view', 'View project');
+router.get('/view/:id(\\d+)', function(req, res, next) {
+    Project.findOne({pid: req.params.id}).then(function(project){
+        if(!project) {
+            res.redirect404('Project not found');
+        } else {
+            res.addData('project', project);
+            res.setPath([{name: "Home", url: '/'}, {name: 'Project'}, {name: 'View'}]);
+            res.templateRender('project/view', 'View project');
+        }
+    });
 });
 
 router.get('/add', function(req, res, next) {
