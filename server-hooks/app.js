@@ -15,6 +15,9 @@ if(_.isUndefined(dotenv.parsed)) {
     process.exit(1);
 }
 
+// Load mongoose
+require('./config/mongoose');
+
 // Routes
 var index = require('./routes/index');
 var project = require('./routes/project');
