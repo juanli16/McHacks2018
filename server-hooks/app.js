@@ -18,6 +18,7 @@ if(_.isUndefined(dotenv.parsed)) {
 // Routes
 var index = require('./routes/index');
 var project = require('./routes/project');
+var api = require('./routes/api');
 
 // Express app
 var app = express();
@@ -59,6 +60,7 @@ app.use(routers.funcRedirectPost);
 // Register routes
 app.use('/', index);
 app.use('/project', project);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
