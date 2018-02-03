@@ -23,6 +23,8 @@ router.get('/view/:id(\\d+)', function(req, res, next) {
             res.redirect404('Project not found');
         } else {
             res.addData('project', project);
+            res.loadScript('heatMap');
+            res.addData('calheatmap_data', ['/project/json/' + project.pid]),
             res.setPath([{name: "Home", url: '/'}, {name: 'Projects', url: '/project'}, {name: project.name}]);
             res.templateRender('project/view', 'View project');
         }
