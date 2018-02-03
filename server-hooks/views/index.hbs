@@ -1,2 +1,52 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<!DOCTYPE html>
+<html lang="en">
+    {{> include/header}}
+    <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+        {{> include/nav}}
+
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                {{# if g_notification}}
+                    <div class="alert alert-warning">{{g_notification}}</div>
+                {{/if}}
+                {{#if _path}}
+                    <ol class="breadcrumb">
+                        {{# each _path}}
+                            {{# if this.url}}
+                                <li class="breadcrumb-item">
+                                    <a href="{{this.url}}">{{this.name}}</a>
+                                </li>
+                            {{else}}
+                                <li class="breadcrumb-item active">{{this.name}}</li>
+                            {{/if}}
+                        {{/each}}
+                    </ol>
+                {{/if}}
+
+                {{# if g_errors }}
+                    <div class="alert alert-danger" role="alert">
+                        {{# each g_errors }}
+                            <div class="col-12">{{ this }}</div>
+                        {{/each}}
+                    </div>
+                {{/if}}
+
+                {{# if g_success }}
+                    <div class="alert alert-success" role="alert">
+                        {{# each g_success }}
+                            <div class="col-12">{{ this }}</div>
+                        {{/each}}
+                    </div>
+                {{/if}}
+
+                <div class="row">
+                    <div class="col-12">
+{{> (lookup . 'main_page') }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {{> include/footer}}
+    </body>
+</html>

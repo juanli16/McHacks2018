@@ -1,0 +1,16 @@
+#editor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-size: 16px;
+}
+
+.editor-container{
+    height: 300px;
+}
+
+.editor-btn {
+    padding-top: 20px;
+}
