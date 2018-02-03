@@ -1,7 +1,22 @@
 <h2>{{ project.name }}</h2>
-<div class="col-md-12">
+<div class="col-md-12 top-space">
+    <ul class="list-group">
+        <li class="list-group-item">Project name: {{project.name}}</li>
+        <li class="list-group-item">Authors: </li>
+        <li class="list-group-item">Operating system: </li>
+        <li class="list-group-item">Top Programing language: </li>
+        <li class="list-group-item">Total commits: </li>
+    </ul>
+</div>
+
+<div class="col-md-12 top-space">
     <h4 class="card-title">Commits</h4>
-    <div class="list-group">
+    <div class="">
+        <button id="domain-highlight-previous-selector-0" style="margin-bottom: 10px;" class="btn"><i class="fa fa-arrow-left"></i></button>
+        <button id="domain-highlight-next-selector-0" style="margin-bottom: 10px;" class="btn"><i class="fa fa-arrow-right"></i></button>
+        <div id="cal-heatmap-0"></div>
+    </div>
+    <div class="list-group top-space">
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">Commit message</h5>
