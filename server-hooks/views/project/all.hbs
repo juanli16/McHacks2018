@@ -1,5 +1,18 @@
-<div class="card">
-    <div class="card-body">
-        <h2 class="card-title">All projects</h2>
+<h2 class="card-title">All projects</h2>
+{{# each projects}}
+    <div class="card" style="margin-top: 10px">
+        <div class="card-body">
+            <div class="float-left">
+                <h5 class="card-title">{{this.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">By </h6>
+                <p class="card-text">Last push: </p>
+                <a href="/project/view/{{this.pid}}" class="card-link">View project</a>
+            </div>
+            <div class="float-right">
+                <button id="domain-highlight-previous-selector-{{@index}}" style="margin-bottom: 10px;" class="btn"><i class="fa fa-arrow-left"></i></button>
+                <button id="domain-highlight-next-selector-{{@index}}" style="margin-bottom: 10px;" class="btn"><i class="fa fa-arrow-right"></i></button>
+                <div id="cal-heatmap-{{@index}}"></div>
+            </div>
+        </div>
     </div>
-</div>
+{{/each}}
