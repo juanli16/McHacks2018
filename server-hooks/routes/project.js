@@ -4,8 +4,17 @@ var Project = require('../models/project').Project;
 var _ = require('lodash');
 
 router.get('/', function(req, res, next) {
-    res.setPath([{name: "Home", url: '/'}, {name: 'Project'}, {name: 'All'}]);
-    res.templateRender('project/all', 'All projects');
+    Project.find().then(function(projects) {
+        res.addData('projects', projects);
+        res.loadScript('heatMap');
+        var links = [];
+        for(var i=0; i < projects.length; i++) {
+            links.push('/project/json/' + projects[i].pid);
+        }
+        res.addData('calheatmap_data', links),
+        res.setPath([{name: "Home", url: '/'}, {name: 'Project'}, {name: 'All'}]);
+        res.templateRender('project/all', 'All projects');
+    });
 });
 
 router.get('/view/:id(\\d+)', function(req, res, next) {
@@ -36,6 +45,13 @@ router.post('/add', function(req, res, next) {
         res.redirectPost('/project/add');
     });
 });
+
+router.get('/json/:id(\\d+)', function(req, res, next) {
+    res.send({
+        946702811: 14
+    });
+});
+
 
 
 module.exports = router;
