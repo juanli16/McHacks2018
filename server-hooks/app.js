@@ -16,7 +16,7 @@ if(_.isUndefined(dotenv.parsed)) {
 }
 
 // Configure db
-require('./config/mongoose');
+// require('./config/mongoose');
 
 // Configure hbs
 require('./config/hbs');
@@ -39,11 +39,11 @@ app.set('view engine', 'hbs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({
-    cookie: { maxAge: 60000 },
-    resave: true,
-    saveUninitialized: true,
-    secret: process.env.COOKIE_SECRET}));
+// app.use(session({
+//     cookie: { maxAge: 60000 },
+//     resave: true,
+//     saveUninitialized: true,
+//     secret: process.env.COOKIE_SECRET}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
