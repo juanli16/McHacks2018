@@ -6,4 +6,9 @@ router.get('/', function(req, res, next) {
     res.templateRender('project/all', 'All projects');
 });
 
+router.get('/view', function(req, res, next) {
+    res.setPath([{name: "Home", url: '/'}, {name: 'Project'}, {name: 'View'}]);
+    res.templateRender('project/view', 'View project');
+});
+
 module.exports = router;
