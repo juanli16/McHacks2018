@@ -7,7 +7,7 @@ var ProjectSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    title: {
+    name: {
         type: String,
         required: true
     },
@@ -19,9 +19,9 @@ var ProjectSchema = new mongoose.Schema({
 
 ProjectSchema.plugin(autoIncrement.plugin, {
     model: 'Project',
-    field: 'qid',
+    field: 'pid',
     startAt: 1,
     incrementBy: 1
 });
 
-module.exports. = mongoose.model('ProjectSchema', ProjectSchema);
+module.exports.Project = mongoose.model('Project', ProjectSchema);
