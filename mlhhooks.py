@@ -14,6 +14,28 @@ import httplib
 PORT = '3000'
 HEADER = {"content-type": "application/json"}
 
+API = {
+	"1":"NuanceMix"
+		}
+
+TECHNOLOGY = {
+	"node_modules" : "NodeJS"
+		}
+
+PROGLANG = {
+		"java" : "Java",
+		"py" : "Python",
+		"css" : "CSS",
+		"cc" : "C++",
+		"cpp": "C++",
+		"c" : "C",
+		"js": "JavaScript",
+		"ts": "TypeScript",
+		"html": "HTML",
+		"pl": "Perl",
+		"sh": "Shell"
+		}
+
 url = 'localhost' #change this when the time is right 
 post_fields = {"GIT" : "HOOKS"} #json file, where you put all the json data
 
