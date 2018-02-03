@@ -1,6 +1,4 @@
-const Global = require('../models/global').Global;
 const _ = require('lodash');
-const jwt = require('jsonwebtoken');
 
 function init(req, res, next) {
     res.data = {};
@@ -8,28 +6,7 @@ function init(req, res, next) {
 }
 
 function global(req, res, next) {
-    res.addData('g_webName', '{{CSAlgorithms}}');
-    res.addData('g_submissionType', res.getData('g_constant')['SUBMIT_TYPE_MANUAL']);
-    Global.find({}).then(function (global) {
-        if(global.length > 0) {
-            global = global.pop();
-            if(!_.isEmpty(global.webName)) {
-                res.addData('g_webName', global.webName);
-            }
-            if(!_.isEmpty(global.contactEmail)) {
-                res.addData('g_contactEmail', global.contactEmail);
-            }
-            if(!_.isEmpty(global.notification)) {
-                res.addData('g_notification', global.notification);
-            }
-            if(!_.isEmpty(global.submissionType)) {
-                res.addData('g_submissionType', global.submissionType);
-            }
-        }
-        next();
-    }).catch(function (reason) {
-        next();
-    });
+    res.addData('g_webName', 'MLH Hooks');
 }
 
 function funcTemplateRender(req, res, next) {
@@ -162,37 +139,6 @@ function funcGetData(req, res, next) {
     next();
 }
 
-function funcCookie(req, res, next) {
-    var tokenName = 'csa_token';
-    res.setCSACookie = function(data) {
-        if(!_.isObject(data)) {
-            throw new Error('Cookie value must be an object');
-        }
-        var token = jwt.sign(data, process.env.JWT_SECRET).toString();
-        res.cookie(tokenName, token);
-    };
-
-    res.unsetCSACookie = function() {
-        res.cookie(tokenName, '', {expires: new Date(0)});
-    };
-
-    req.getCSACookie = function() {
-        var token = req.cookies[tokenName];
-        if(!token || _.isUndefined(token)) {
-            return Promise.reject();
-        }
-
-        return new Promise(function(resolve, reject) {
-            try{
-                resolve(jwt.verify(token, process.env.JWT_SECRET));
-            } catch (e) {
-                reject();
-            }
-        });
-    };
-    next();
-}
-
 function loadConstants(req, res, next) {
     res.addData('constants', require('constants'));
 }
@@ -209,4 +155,3 @@ module.exports.funcSetSuccess = funcSetSuccess;
 module.exports.funcRedirectPost = funcRedirectPost;
 module.exports.funcAddData = funcAddData;
 module.exports.funcGetData = funcGetData;
-module.exports.funcCookie = funcCookie;
