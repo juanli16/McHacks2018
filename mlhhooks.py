@@ -89,7 +89,7 @@ def POST(url, post_fields):
 try:
     oss= sys.platform
     dist = platform.dist()
-    dirPath = os.getcwd()
+    dirPath = os.getcwd() + "/../../"
     files = os.listdir(dirPath)
 except OSError:
     print("Os error. Fatal, quitting!")
