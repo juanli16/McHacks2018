@@ -15,9 +15,54 @@ import json
 import httplib
 #Useful packages8
 from collections import Counter as Counter
+import hashlib
 
 PORT = '3000'
 HEADER = {"content-type": "application/json"}
+
+# grep 
+API = {
+	"nuance":"Nuance",
+	"ciscospark" : "Cisco Spark",
+	"tensorflow" : "Tensor Flow",
+	"opencv" : "OpenCV",
+	"numpy" : "numpy",
+	"genetec" : "Genetec",
+		}
+# grep
+TECHNOLOGY = {
+	"nodejs" : "NodeJS",
+	"django" : "Django",
+	"ionic" : "Ionic",
+	"angular.js" : "AngularJS",
+	"ember.js" : "AngularJS",
+	"mongodb" : "MongoDB"
+		}
+
+# find through files variable
+PROGLANG = {
+		"java" : "Java",
+		"py" : "Python",
+		"css" : "CSS",
+		"cc" : "C++",
+		"cpp": "C++",
+		"c" : "C",
+		"js": "JavaScript",
+		"ts": "TypeScript",
+		"html": "HTML",
+		"pl": "Perl",
+		"sh": "Shell",
+		"swift": "Swift"
+		}
+
+IDE = {
+		"nbproject"	: "NetBeans IDE",
+		"eclipse.core" :  "Eclipse IDE",
+		".sln" : "Visual Studio",
+		".idea" : "IntelliJ IDEA",
+		".xcodeproj" : "Xcode",
+		"komodoproject" : "Komodo IDE",
+	}
 
 url = 'localhost' #change this when the time is right 
 post_fields = {"GIT" : "HOOKS"} #json file, where you put all the json data
@@ -42,6 +87,22 @@ except OSError:
 
 #cd: os.chdir("path")
 
+def hash_id(dirpath):
+    """Hash project name with md5
+    """
+    try:
+        os.chdir(dirpath)
+    except OSError:
+        print("OS error. Fatal, quitting!")
+    
+    p = subprocess.Popen('basename `git rev-parse --show-toplevel`', shell=True,  stdout=subprocess.PIPE)
+    (name, _) = p.communicate()
+    print(name)
+    ids = hashlib.md5(b'name')
+    print(ids.hexdigest())
+    return ids.hexdigest()
+
+
 def ext(dirpath):
     """cd  to dirpath, recursively list all file names and append to
     a list. Then make a dictionary out of all the file extensions
@@ -61,6 +122,9 @@ def ext(dirpath):
 
 
 def parse_gitlog(dirpath):
+    """Using git log command on commandline to 
+    parse log file and convert it to dictionary
+    """
     try:
         os.chdir(dirpath)
     except OSError:
@@ -75,12 +139,23 @@ def parse_gitlog(dirpath):
     log = [row.strip().split("\x1f") for row in log]
     log = [dict(zip(GIT_COMMIT_FIELDS, row)) for row in log]
     return log
+    
+
 
 extension = ext(dirPath)
 log = parse_gitlog(dirPath)
+ids = hash_id(dirPath)
 
 print("File extension dictionary----------------")
 print(extension)
 print("Processed git log------------------------")
 print(log)
+print(ids)
+
+#POST(url, post_fields)
+
+#posting jsons:
+post_fields['id'] = ids
+post_fields["commit"] = log
+post_fields["ext"] = extension
 POST(url, post_fields)
