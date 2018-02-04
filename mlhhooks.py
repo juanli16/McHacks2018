@@ -19,14 +19,26 @@ from collections import Counter as Counter
 PORT = '3000'
 HEADER = {"content-type": "application/json"}
 
+# grep 
 API = {
-	"1":"NuanceMix"
+	"nuance":"Nuance",
+	"ciscospark" : "Cisco Spark",
+	"tensorflow" : "Tensor Flow",
+	"opencv" : "OpenCV",
+	"numpy" : "numpy",
+	"genetec" : "Genetec",
 		}
-
+# grep
 TECHNOLOGY = {
-	"node_modules" : "NodeJS"
+	"nodejs" : "NodeJS",
+	"django" : "Django",
+	"ionic" : "Ionic",
+	"angular.js" : "AngularJS",
+	"ember.js" : "AngularJS",
+	"mongodb" : "MongoDB"
 		}
 
+# find through files variable
 PROGLANG = {
 		"java" : "Java",
 		"py" : "Python",
@@ -38,8 +50,18 @@ PROGLANG = {
 		"ts": "TypeScript",
 		"html": "HTML",
 		"pl": "Perl",
-		"sh": "Shell"
+		"sh": "Shell",
+		"swift": "Swift"
 		}
+
+IDE = {
+		"nbproject"	: "NetBeans IDE",
+		"eclipse.core" :  "Eclipse IDE",
+		".sln" : "Visual Studio",
+		".idea" : "IntelliJ IDEA",
+		".xcodeproj" : "Xcode",
+		"komodoproject" : "Komodo IDE",
+	}
 
 url = 'localhost' #change this when the time is right 
 post_fields = {"GIT" : "HOOKS"} #json file, where you put all the json data
