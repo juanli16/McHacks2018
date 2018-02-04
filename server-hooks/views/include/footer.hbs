@@ -31,8 +31,9 @@
                 start: startDate,
                 itemSelector: '#cal-heatmap-{{@index}}',
                 domain: "hour",
-                cellSize: 9,
-                range: 12,
+                cellSize: 8,
+                range: 15,
+                data: '{{this}}',
                 animationDuration: 100,
                 domainGutter: 0,
                 domainMargin: 5,
@@ -73,6 +74,36 @@
             editor.getSession().on('change', function(){
                 textarea.val(editor.getSession().getValue());
             });
+        </script>
+    {{/if}}
+
+    {{# if g_script.chart}}
+        <script src="/vendor/chart.js/Chart.min.js"></script>
+        <script>
+            var ctx = document.getElementById("dashboard-chart");
+            new Chart(ctx,{
+                type: "line",
+                data: {
+                    labels: [
+                        "24h ago","","22h ago","","20h ago","","18h ago", "", "16h ago", "", "14h ago", "",
+                        "12h ago", "", "10h ago", "", "8h ago", "", "6h ago", "4h ago", "2h ago", "Now"],
+                    datasets: [{
+                        label :"Commits",
+                        data: [{{charData}}],
+                        fill: true,
+                        backgroundColor:"rgba(2,117,216,0.2)",
+                        borderColor:"rgba(2,117,216,1)",
+                        pointRadius:5,
+                        pointBackgroundColor:"rgba(2,117,216,1)",
+                        pointBorderColor:"rgba(255,255,255,0.8)",
+                        pointHoverRadius:5,
+                        pointHoverBackgroundColor:"rgba(2,117,216,1)",
+                        pointHitRadius:20,
+                        pointBorderWidth:2,
+                        lineTension: 0.3
+                    }]
+                },
+                options:{}});
         </script>
     {{/if}}
 </div>

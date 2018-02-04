@@ -53,6 +53,7 @@ function funcLoadScript(req, res, next) {
             case 'heatMap':
             case 'ckeditor':
             case 'datetimepicker':
+            case 'chart':
             case 'ace':
                 if(_.isUndefined(res.getData('g_script'))) {
                     res.addData('g_script', {});

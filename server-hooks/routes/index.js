@@ -3,13 +3,9 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
     res.setPath([{name: "Home"}]);
+    res.loadScript('chart');
+    res.addData('charData', [65,59,80,81,56,55,65,59,80,81,56,55,65,59,80,81,56,55,65,59,80,81,56,55]);
     res.templateRender('home/home', 'Welcome page');
 });
-
-router.post('/', function(req, res) {
-	console.log("You are receiving!")
-	console.log(req.body)
-	res.send()
-})
 
 module.exports = router;
