@@ -27,6 +27,7 @@ var project = require('./routes/project');
 var api = require('./routes/api');
 var technology = require('./routes/technology');
 var console = require('./routes/console');
+var language = require('./routes/language');
 
 // Express app
 var app = express();
@@ -71,6 +72,7 @@ app.use('/project', project);
 app.use('/api', api);
 app.use('/technology', technology);
 app.use('/console', console);
+app.use('/language', language);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
