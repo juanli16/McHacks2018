@@ -1,0 +1,19 @@
+<h2 class="card-title">Technologies</h2>
+<div class="col-md-12">
+    {{#each technologies}}
+        <div class="row">
+            {{# each this}}
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.name}}</h5>
+                            <p class="card-text">{{this.description}}</p>
+                            <p><small>Used by # projects</small></p>
+                            <a href="/technology/view/{{this.tid}}" class="btn btn-primary">Explore projects</a>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{/each}}
+</div>

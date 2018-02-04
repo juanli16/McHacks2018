@@ -22,6 +22,7 @@ require('./config/mongoose');
 var index = require('./routes/index');
 var project = require('./routes/project');
 var api = require('./routes/api');
+var technology = require('./routes/technology');
 
 // Express app
 var app = express();
@@ -64,6 +65,7 @@ app.use(routers.funcRedirectPost);
 app.use('/', index);
 app.use('/project', project);
 app.use('/api', api);
+app.use('/technology', technology);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
