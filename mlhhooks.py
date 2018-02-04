@@ -16,7 +16,7 @@ import httplib
 #Useful packages8
 from collections import Counter as Counter
 import hashlib
-import urllib
+import urllib2
 
 PORT = '3000'
 HEADER = {"content-type": "application/json"}
@@ -71,13 +71,13 @@ url = 'localhost:3000'
 post_fields = {"GIT" : "HOOKS"} #json file, where you put all the json data
 
 def POST(url, post_fields):
-	params = urllib.urlencode(post_fields)
-        headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
-	conn = httplib.HTTPConnection(url)
-	conn.request("POST", "/hooks/push", params, headers)
-	response = conn.getresponse()
+	params = json.dumps(post_fields)
+        req = urllib2.Request('http://localhost:3000/hooks/push')
+	req.add_header('Content-Type', 'application/json')
+	response = urllib2.urlopen(req, params)
         print response.read()
-	conn.close()
+
+
 
 try:
     oss= sys.platform
@@ -178,13 +178,13 @@ log = parse_gitlog(dirPath)
 pro_name, ids = hash_id(dirPath)
 
 api_dict, lang = search_api(API, PROGLANG,  dirPath)
-post_fields['OS'] = oss
+post_fields['os'] = oss
 post_fields['distro'] = dist
-post_fields["Project name"] = pro_name
+post_fields["name"] = pro_name
 post_fields['id'] = ids
 post_fields["commit"] = log
 post_fields["ext"] = extension
-post_fields["API"] = api_dict
-post_fields["Programming language"] = lang
+post_fields["api"] = api_dict
+post_fields["language"] = lang
 POST(url, post_fields)
 
