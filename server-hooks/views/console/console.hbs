@@ -10,7 +10,7 @@
                 </div>
                 <div class="form-group">
                     <label for="message">Console Message</label>
-                    <textarea class="form-control" name="message" id="message" rows="10" placeholder="Message displayed on the hacker console"></textarea>
+                    <textarea class="form-control console-message" name="message" id="message" rows="10" placeholder="Message displayed on the hacker console"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -21,15 +21,23 @@
 <div class="col-md-12 top-space">
     <h4 class="card-title">All Messages</h4>
     <div class="list-group top-space">
+        {{# if consoles}}
+
         {{# each consoles}}
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <a href="/console/edit/{{this.cid}}" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">Console ID #{{this.cid}}</h5>
-                    <small>3 days ago</small>
+                    <small>{{#fromNow this.createdAt}}{{/fromNow}}</small>
                 </div>
-                <p class="mb-1">{{nl2br this.prettyMessage}}</p>
-                <small>By Hello world</small>
+                <p class="mb-1"><pre>{{this.prettyMessage}}</pre></p>
             </a>
         {{/each}}
+        {{else}}
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">No messages</h5>
+                </div>
+            </a>
+        {{/if}}
     </div>
 </div>

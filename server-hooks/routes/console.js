@@ -27,8 +27,8 @@ router.get('/print', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     var body = _.pick(req.body, ['token', 'message']);
-    var project = new Console(body);
-    project.save().then(function (doc) {
+    var console = new Console(body);
+    console.save().then(function (doc) {
         res.setSuccess('Console message added successfully');
         res.redirect('/console');
     }).catch(function (reason) {
@@ -37,5 +37,45 @@ router.post('/', function(req, res, next) {
     });
 });
 
+router.get('/edit/:id(\\d+)', function(req, res, next) {
+    Console.findOne({cid: req.params.id}).then(function(console){
+        if(!console) {
+            res.redirect404("Console message not found");
+        } else {
+            res.addData('console', console);
+            res.setPath([{name: "Home", url: '/'}, {name: 'Console', url: '/console'},{name: 'Edit'}]);
+            res.templateRender('console/edit', 'Edit Console');
+        }
+    });
+});
+
+router.post('/edit/:id(\\d+)', function(req, res, next) {
+    var body = _.pick(req.body, ['token', 'message']);
+    Console.findOne({cid: req.params.id}).then(function (doc) {
+        if(_.isEmpty(doc)) {
+            res.redirect404('Console not found');
+        } else {
+            doc.message = body.message;
+            doc.token = body.token;
+            doc.save().then(function() {
+                res.setSuccess('Console message updated successfully');
+                res.redirect('/console/edit/' + req.params.id);
+            }).catch(function(reason) {
+                res.setReason(reason);
+                res.redirectPost('/console/edit/' + req.params.id);
+            });
+        }
+    });
+});
+
+router.get('/delete/:id(\\d+)', function(req, res, next) {
+    Console.remove({cid: req.params.id}).then(function() {
+        res.setSuccess("Console entry deleted successfully");
+        res.redirect('/console');
+    }).catch(function(reason) {
+        res.setReason(reason);
+        res.redirect('/console/edit/' + req.params.id);
+    });
+});
 
 module.exports = router;

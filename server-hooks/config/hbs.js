@@ -5,6 +5,10 @@ Handlebars.registerHelper('formatDateTime', function (date, format) {
     return moment(date).format(format);
 });
 
+Handlebars.registerHelper('fromNow', function (date) {
+    return moment(date).fromNow();
+});
+
 Handlebars.registerHelper('eventStatus', function (startDate, endDate) {
     var start = moment(startDate);
     var end = moment(endDate);
