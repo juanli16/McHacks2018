@@ -10,19 +10,22 @@
 <div class="col-md-12 top-space">
     <h4 class="card-title">All projects</h4>
     {{# each projects}}
-        <div class="card" style="margin-top: 10px">
+        <div class="card top-space">
             <div class="card-body">
-                <div class="float-left">
-                    <h5 class="card-title">{{this.name}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">By </h6>
-                    <p class="card-text">Last push: </p>
-                    <a href="/project/view/{{this.pid}}" class="card-link">View project</a>
+                <div class="row">
+                    <div class="col-md-2">
+                        <h5 class="card-title">{{this.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">By </h6>
+                        <p class="card-text">Last push: </p>
+                        <a href="/project/view/{{this.pid}}" class="card-link">View project</a>
+                    </div>
+                    <div class="col-md-10" style="overflow: auto">
+                        <button id="domain-highlight-previous-selector-{{@index}}" style="margin-bottom: 10px;" class="btn"><i class="fa fa-arrow-left"></i></button>
+                        <button id="domain-highlight-next-selector-{{@index}}" style="margin-bottom: 10px;" class="btn"><i class="fa fa-arrow-right"></i></button>
+                        <div id="cal-heatmap-{{@index}}"></div>
+                    </div>
                 </div>
-                <div class="float-right" style="padding-right: 30px">
-                    <button id="domain-highlight-previous-selector-{{@index}}" style="margin-bottom: 10px;" class="btn"><i class="fa fa-arrow-left"></i></button>
-                    <button id="domain-highlight-next-selector-{{@index}}" style="margin-bottom: 10px;" class="btn"><i class="fa fa-arrow-right"></i></button>
-                    <div id="cal-heatmap-{{@index}}"></div>
-                </div>
+
             </div>
         </div>
     {{/each}}
