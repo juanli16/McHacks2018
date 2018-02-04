@@ -1,21 +1,35 @@
 <h2 class="card-title">All projects</h2>
-{{# each projects}}
-    <div class="card top-space">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-2">
-                    <h5 class="card-title">{{this.name}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">By </h6>
-                    <p class="card-text">Last push: </p>
-                    <a href="/project/view/{{this.pid}}" class="card-link">View project</a>
+{{# if projects}}
+    {{# each projects}}
+        <div class="card top-space">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <h5 class="card-title">{{this.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">By </h6>
+                        <p class="card-text">Last push: </p>
+                        <a href="/project/view/{{this.pid}}" class="card-link">View project</a>
+                    </div>
+                    <div class="col-md-10" style="overflow: auto">
+                        <button id="domain-highlight-previous-selector-{{@index}}" style="margin-bottom: 10px;" class="btn"><i class="fa fa-arrow-left"></i></button>
+                        <button id="domain-highlight-next-selector-{{@index}}" style="margin-bottom: 10px;" class="btn"><i class="fa fa-arrow-right"></i></button>
+                        <div id="cal-heatmap-{{@index}}"></div>
+                    </div>
                 </div>
-                <div class="col-md-10" style="overflow: auto">
-                    <button id="domain-highlight-previous-selector-{{@index}}" style="margin-bottom: 10px;" class="btn"><i class="fa fa-arrow-left"></i></button>
-                    <button id="domain-highlight-next-selector-{{@index}}" style="margin-bottom: 10px;" class="btn"><i class="fa fa-arrow-right"></i></button>
-                    <div id="cal-heatmap-{{@index}}"></div>
-                </div>
-            </div>
 
+            </div>
         </div>
-    </div>
-{{/each}}
+    {{else}}
+        <div class="card top-space">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <p>No entries found</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {{/each}}
+
+{{/if}}
