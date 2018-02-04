@@ -16,6 +16,7 @@ import httplib
 #Useful packages8
 from collections import Counter as Counter
 import hashlib
+import urllib
 
 PORT = '3000'
 HEADER = {"content-type": "application/json"}
@@ -66,14 +67,17 @@ IDE = {
 		"komodoproject" : "Komodo IDE",
 	}
 
-url = 'localhost' #change this when the time is right 
+url = 'localhost:3000'
 post_fields = {"GIT" : "HOOKS"} #json file, where you put all the json data
 
 def POST(url, post_fields):
-	conn = httplib.HTTPConnection(url,PORT)
-	conn.request('POST', "", json.dumps(post_fields), HEADER)
-	response = conn.getresponse().status
-	print "POST Request: ", response
+	params = urllib.urlencode(post_fields)
+        headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
+	conn = httplib.HTTPConnection(url)
+	conn.request("POST", "/hooks/push", params, headers)
+	response = conn.getresponse()
+	print response.status, response.reason
+	conn.close()
 
 try:
     oss= sys.platform
@@ -201,5 +205,5 @@ post_fields["commit"] = log
 post_fields["ext"] = extension
 post_fields["API"] = api_dict
 post_fields["Programming language"] = lang
-POST(url, post_fiields)
+POST(url, post_fields)
 

@@ -2,7 +2,7 @@
     <footer class="sticky-footer">
         <div class="container">
             <div class="text-center">
-                <small>Copyright © 2017</small>
+                <small>Copyright © 2018</small>
             </div>
         </div>
     </footer>
@@ -24,7 +24,8 @@
         <script type="text/javascript" src="/js/cal-heatmap.min.js"></script>
         <script type="text/javascript">
             var startDate = new Date();
-            startDate = new Date(startDate.getTime() - (1000*60*60*11));
+            var rangeVal = 15;
+            startDate = new Date(startDate.getTime() - (1000*60*60*(rangeVal-1)));
             {{#each calheatmap_data}}
             var cal = new CalHeatMap();
             cal.init({
@@ -32,7 +33,7 @@
                 itemSelector: '#cal-heatmap-{{@index}}',
                 domain: "hour",
                 cellSize: 8,
-                range: 15,
+                range: rangeVal,
                 data: '{{this}}',
                 animationDuration: 100,
                 domainGutter: 0,
