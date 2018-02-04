@@ -75,7 +75,14 @@ def POST(url, post_fields):
         req = urllib2.Request('http://localhost:3000/hooks/push')
 	req.add_header('Content-Type', 'application/json')
 	response = urllib2.urlopen(req, params)
-        print response.read()
+	print "___  ___ _      _   _   _   _             _        "
+        print "|  \/  || |    | | | | | | | |           | |       "
+        print "| .  . || |    | |_| | | |_| | ___   ___ | | _____ "
+        print "| |\/| || |    |  _  | |  _  |/ _ \ / _ \| |/ / __|"
+        print "| |  | || |____| | | | | | | | (_) | (_) |   <\__ \\"
+        print "\_|  |_/\_____/\_| |_/ \_| |_/\___/ \___/|_|\_\___/"
+        print "---------------------------------------------------"
+	print response.read()
 
 
 
