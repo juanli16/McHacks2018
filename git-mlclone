@@ -16,7 +16,7 @@ mv mlhhooks.py .git/hooks/
 dir=".git/hooks"
 touch $dir/pre-push
 echo "#!/bin/sh" >> $dir/pre-push
-echo "echo "Using mlhooks.py soon" >> $dir/pre-push
+echo 'echo "Using mlhooks.py soon"' >> $dir/pre-push
 echo "python mlhhooks.py" >> $dir/pre-push
 echo "exit 0" >> $dir/pre-push
 
