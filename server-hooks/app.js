@@ -18,11 +18,15 @@ if(_.isUndefined(dotenv.parsed)) {
 // Load mongoose
 require('./config/mongoose');
 
+// Load HBS config
+require('./config/hbs');
+
 // Routes
 var index = require('./routes/index');
 var project = require('./routes/project');
 var api = require('./routes/api');
 var technology = require('./routes/technology');
+var console = require('./routes/console');
 
 // Express app
 var app = express();
@@ -66,6 +70,7 @@ app.use('/', index);
 app.use('/project', project);
 app.use('/api', api);
 app.use('/technology', technology);
+app.use('/console', console);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

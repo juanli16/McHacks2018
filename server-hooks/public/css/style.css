@@ -19,3 +19,7 @@
     margin-top: 20px;
 }
 
+.console-message{
+    font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
