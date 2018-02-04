@@ -9,11 +9,19 @@ router.post('/push', function(req, res, next) {
     var json = req.body;
     // Create project
     Project.remove({hash: json.id}).then(function(){
-        var project  = new Project({hash: json.id, name: json.name, os: json.os});
+        // Prepare languages
+        var languageStr = "";
+        for(var lang in json.language) {
+            languageStr += " " + json.language[lang];
+        }
+
+        // Create new project
+        var project  = new Project({hash: json.id, name: json.name, os: json.os, language: languageStr});
         project.save().then(function () {
             // Find project
             Project.findOne({hash: json.id}).then(function(project) {
                 // TODO Delete old commits from DB
+                // Add commits
                 project.commits = [];
                 for(var i=0; i < json.commit.length; i++) {
                     var commit = json.commit[i];
@@ -25,6 +33,7 @@ router.post('/push', function(req, res, next) {
                     commitObj.save();
                     project.commits.push(commitObj);
                 }
+                // Add languages
                 project.save().then(function(){
                     Console.find().sort({cid: 'desc'}).limit(1).then(function(consoles){
                         res.set({ 'content-type': 'application/json; charset=utf-8' })

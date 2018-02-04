@@ -18,6 +18,9 @@ var ProjectSchema = new mongoose.Schema({
     os: {
         type: String
     },
+    language: {
+        type: String
+    },
     commits: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Commit'
