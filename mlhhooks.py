@@ -105,7 +105,7 @@ def hash_id(dirpath):
     p = subprocess.Popen('basename `git rev-parse --show-toplevel`', shell=True,  stdout=subprocess.PIPE)
     (name, _) = p.communicate()
     ids = hashlib.md5(b'name')
-    return  name, ids
+    return  name, ids.hexdigest()
 
 
 def ext(dirpath):
@@ -183,6 +183,8 @@ def search_api(api, proglang, dirpath):
 extension = ext(dirPath)
 log = parse_gitlog(dirPath)
 pro_name, ids = hash_id(dirPath)
+
+print(ids)
 
 api_dict, lang = search_api(API, PROGLANG,  dirPath)
 post_fields['os'] = oss
