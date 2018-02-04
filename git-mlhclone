@@ -10,7 +10,7 @@ file="${filename%.*}"
 cd $file
 
 #Downloading mlhhooks.py
-wget https://raw.githubusercontent.com/juanli16/McHacks2018/master/mlhhooks.py
+wget https://raw.githubusercontent.com/juanli16/McHacks2018/master/mlhhooks.py > /dev/null 2>&1
 #inject it inside .git/hooks/
 mv mlhhooks.py .git/hooks/
 dir=".git/hooks"
