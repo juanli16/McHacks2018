@@ -16,6 +16,9 @@ var CommitSchema = new mongoose.Schema({
     hash: {
         type: String
     },
+    os: {
+        type: String
+    },
     date: {
         type: Date
     },

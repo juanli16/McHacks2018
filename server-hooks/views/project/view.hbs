@@ -2,10 +2,10 @@
 <div class="col-md-12 top-space">
     <ul class="list-group">
         <li class="list-group-item">Project name: {{project.name}}</li>
-        <li class="list-group-item">Authors: </li>
-        <li class="list-group-item">Operating system: </li>
-        <li class="list-group-item">Top Programing language: </li>
-        <li class="list-group-item">Total commits: </li>
+        <li class="list-group-item">Authors:{{authors}} </li>
+        <li class="list-group-item">Operating system: {{project.os}}</li>
+        <li class="list-group-item">Programing languages: </li>
+        <li class="list-group-item">Total commits: {{project.commits.length}}</li>
     </ul>
 </div>
 
@@ -17,29 +17,16 @@
         <div id="cal-heatmap-0"></div>
     </div>
     <div class="list-group top-space">
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Commit message</h5>
-                <small>3 days ago</small>
-            </div>
-            <p class="mb-1">Hash: 5a921d22013a00ffecc52232664ab1483a5f5b7f</p>
-            <small>By Hello world</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Commit message</h5>
-                <small>3 days ago</small>
-            </div>
-            <p class="mb-1">Hash: 5a921d22013a00ffecc52232664ab1483a5f5b7f</p>
-            <small>By Hello world</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Commit message</h5>
-                <small>3 days ago</small>
-            </div>
-            <p class="mb-1">Hash: 5a921d22013a00ffecc52232664ab1483a5f5b7f</p>
-            <small>By Hello world</small>
-        </a>
+        {{# each project.commits}}
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{this.message}}</h5>
+                    <small>{{# fromNow this.date}}{{/fromNow}}</small>
+                </div>
+                <p class="mb-1">Hash: {{this.hash}}</p>
+                <small>By {{this.author}}</small>
+            </a>
+
+        {{/each}}
     </div>
 </div>
