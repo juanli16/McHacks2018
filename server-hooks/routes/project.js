@@ -54,6 +54,4 @@ router.get('/json/:id(\\d+)', function(req, res, next) {
     });
 });
 
-
-
 module.exports = router;

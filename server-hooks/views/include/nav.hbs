@@ -19,20 +19,26 @@
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="/api">
-                    <i class="fa fa-fw fa-user"></i>
-                    <span class="nav-link-text">API</span>
+                    <i class="fa fa-fw fa-globe"></i>
+                    <span class="nav-link-text">APIs</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="/technology">
-                    <i class="fa fa-fw fa-user"></i>
-                    <span class="nav-link-text">Technology</span>
+                    <i class="fa fa-fw fa-gear"></i>
+                    <span class="nav-link-text">Technologies</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="/programminglang">
-                    <i class="fa fa-fw fa-user"></i>
-                    <span class="nav-link-text">Programming language</span>
+                    <i class="fa fa-fw fa-language"></i>
+                    <span class="nav-link-text">Languages</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href="/ide">
+                    <i class="fa fa-fw fa-edit"></i>
+                    <span class="nav-link-text">IDEs</span>
                 </a>
             </li>
         </ul>
@@ -42,28 +48,6 @@
                     <i class="fa fa-fw fa-angle-left"></i>
                 </a>
             </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            {{# if me}}
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/profile/{{me.uid}}">My Profile</a>
-                </li>
-                {{# if me.admin}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin">Admin</a>
-                    </li>
-                {{/if}}
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/logout">Logout</a>
-                </li>
-            {{else}}
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/register">Register</a>
-                </li>
-            {{/if}}
         </ul>
     </div>
 </nav>
