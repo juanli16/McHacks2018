@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/view/:id(\\d+)', function(req, res, next) {
-    Project.findOne({pid: req.params.id}).then(function(project){
+    Project.findOne({pid: req.params.id}).populate('commits').then(function(project){
         if(!project) {
             res.redirect404('Project not found');
         } else {

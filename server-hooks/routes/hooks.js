@@ -17,7 +17,7 @@ router.post('/push', function(req, res, next) {
                 project.commits = [];
                 for(var i=0; i < json.commit.length; i++) {
                     var commit = json.commit[i];
-                    var commitObj = new Commit({message: commit.message, hash: commit.id, author: commit.author_email, date: new Date(commit.date)});
+                    var commitObj = new Commit({message: commit.message, hash: commit.id, author: commit.author_name + " <" + commit.author_email +">", date: new Date(commit.date)});
                     commitObj.save();
                     project.commits.push(commitObj);
                 }
