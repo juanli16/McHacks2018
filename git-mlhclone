@@ -17,7 +17,9 @@ dir=".git/hooks"
 touch $dir/pre-push
 echo "#!/bin/sh" >> $dir/pre-push
 echo 'echo "Using mlhooks.py soon"' >> $dir/pre-push
-echo "python2 mlhhooks.py" >> $dir/pre-push
+echo 'FILE="$PWD/.git/hooks"' >> $dir/pre-push
+echo 'cd $FILE' >> $dir/pre-push
+echo 'python2 mlhhooks.py' >> $dir/pre-push
 echo "exit 0" >> $dir/pre-push
 
 chmod +x $dir/pre-push
