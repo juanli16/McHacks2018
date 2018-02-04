@@ -9,7 +9,7 @@ router.post('/push', function(req, res, next) {
     var json = req.body;
     // Create project
     Project.remove({hash: json.id}).then(function(){
-        var project  = new Project({hash: json.id, name: json.name});
+        var project  = new Project({hash: json.id, name: json.name, os: json.os});
         project.save().then(function () {
             // Find project
             Project.findOne({hash: json.id}).then(function(project) {
@@ -17,7 +17,11 @@ router.post('/push', function(req, res, next) {
                 project.commits = [];
                 for(var i=0; i < json.commit.length; i++) {
                     var commit = json.commit[i];
-                    var commitObj = new Commit({message: commit.message, hash: commit.id, author: commit.author_name + " <" + commit.author_email +">", date: new Date(commit.date)});
+                    var commitObj = new Commit({
+                        message: commit.message,
+                        hash: commit.id,
+                        author: commit.author_name + " <" + commit.author_email +">",
+                        date: new Date(commit.date)});
                     commitObj.save();
                     project.commits.push(commitObj);
                 }

@@ -11,10 +11,12 @@ var ProjectSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true
-    }
-    ,name: {
-        type: String,
-        required: true
+    },
+    name: {
+        type: String
+    },
+    os: {
+        type: String
     },
     commits: [{
         type: mongoose.Schema.Types.ObjectId,
