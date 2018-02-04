@@ -22,7 +22,16 @@ router.get('/view/:id(\\d+)', function(req, res, next) {
         if(!project) {
             res.redirect404('Project not found');
         } else {
+            var authors = new Set();
+            for(var i=0; i < project.commits.length; i++) {
+                authors.add(project.commits[i].author);
+            }
+            var authorsStr = "";
+            authors.forEach(function(element) {
+                authorsStr += " " + element;
+            });
             res.addData('project', project);
+            res.addData('authors', authorsStr);
             res.loadScript('heatMap');
             res.addData('calheatmap_data', ['/project/json/' + project.pid]),
             res.setPath([{name: "Home", url: '/'}, {name: 'Projects', url: '/project'}, {name: project.name}]);
