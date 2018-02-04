@@ -14,6 +14,17 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/print', function(req, res, next) {
+    Console.find().sort({cid: 'desc'}).limit(1).then(function(consoles){
+        res.set({ 'content-type': 'application/json; charset=utf-8' })
+        if(consoles.length === 1) {
+            res.send(consoles[0].consoleMessage());
+        } else {
+            res.send("");
+        }
+    });
+});
+
 router.post('/', function(req, res, next) {
     var body = _.pick(req.body, ['token', 'message']);
     var project = new Console(body);
@@ -25,5 +36,6 @@ router.post('/', function(req, res, next) {
         res.redirectPost('/console');
     });
 });
+
 
 module.exports = router;

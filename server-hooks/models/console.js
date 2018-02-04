@@ -40,6 +40,7 @@ ConsoleSchema.methods.consoleMessage = function() {
     } else {
         message += "No new message"
     }
+    message += "\n";
     return message;
 };
 
