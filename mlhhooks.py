@@ -22,22 +22,22 @@ HEADER = {"content-type": "application/json"}
 
 # grep 
 API = {
-	"nuance":"Nuance",
-	"ciscospark" : "Cisco Spark",
-	"tensorflow" : "Tensor Flow",
-	"opencv" : "OpenCV",
-	"numpy" : "numpy",
-	"genetec" : "Genetec",
-		}
+    "ciscospark" : ["Cisco Spark"],
+    "tensorflow" : ["Tensor Flow", "tensorflow"],
+    "nuance" : ["Nuance"],
+    "opencv" : ["OpenCV", "opencv2"],
+    "numpy" : ["numpy"],
+    "genetec" : ["Genetec"]
+    }
 # grep
 TECHNOLOGY = {
-	"nodejs" : "NodeJS",
-	"django" : "Django",
-	"ionic" : "Ionic",
-	"angular.js" : "AngularJS",
-	"ember.js" : "AngularJS",
-	"mongodb" : "MongoDB"
-		}
+    "nodejs" : "NodeJS",
+    "django" : "Django",
+    "ionic" : "Ionic",
+    "angular.js" : "AngularJS",
+    "ember.js" : "AngularJS",
+    "mongodb" : "MongoDB"
+    }
 
 # find through files variable
 PROGLANG = {
@@ -142,20 +142,63 @@ def parse_gitlog(dirpath):
     
 
 
+def search_api(api, dirpath):
+    """Search each api string in all the files that has the extension in startword, the startword list will keep growing eventually.
+    """
+    api_dict = {}
+    for k in api.keys():
+        api_dict[k] = False
+    #startword = ['py', 'c', 'cpp', 'h', 'hpp', 'cc', 'java', 'cs', 'js', 'gradle', 'css', 'html', 'sh', 'jsp', 'pl', 'rb', 'cgi', 'asp']
+    startword = ['c', 'cpp', 'h', 'hpp', 'cc', 'java', 'cs', 'js', 'gradle', 'css', 'html', 'sh', 'jsp', 'pl', 'rb', 'cgi', 'asp']
+    try:
+        files = [(root, name) for root, dirs, files in os.walk(dirpath) for name in files if "./.git" not in root]
+        files = [(p,f) for (p,f) in files for s in startword if f.endswith("."+s) ]
+    except OSError:
+        print("OS error. Fatal, quitting!")
+    
+    print(type(api.values()))
+    for k in api.keys():
+        for (p,f) in files:
+            src = p + "/" + f
+            with open(src, "r") as f:
+                lines = f.read()
+                for a in api[k]:
+                    if a in lines:
+                        api_dict[k] = True
+   
+    #Just verifying the file extensions are good, will remove later"
+    """files = [os.path.splitext(os.path.basename(f))[1] for (p,f) in files]
+    files = [f[1:] for f in files]
+    files = filter(None, files)
+    files.sort()
+    dic = dict(Counter(files))
+    print(dic)
+    """
+
+    a = api
+    for k in api_dict.keys():
+        if not api_dict[k]:
+            del a[k]
+    return a
+
 extension = ext(dirPath)
 log = parse_gitlog(dirPath)
 ids = hash_id(dirPath)
 
 print("File extension dictionary----------------")
-print(extension)
+#print(extension)
 print("Processed git log------------------------")
-print(log)
-print(ids)
+#print(log)
+#print(ids)
 
 #POST(url, post_fields)
 
+api_dict = search_api(API, dirPath)
+print("Used api:")
+print(api_dict)
 #posting jsons:
 post_fields['id'] = ids
 post_fields["commit"] = log
 post_fields["ext"] = extension
-POST(url, post_fields)
+POST(url, post_fiields)
+
