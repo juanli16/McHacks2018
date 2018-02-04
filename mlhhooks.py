@@ -143,7 +143,8 @@ def parse_gitlog(dirpath):
     log = log.strip('\n\x1e').split("\x1e")
     log = [row.strip().split("\x1f") for row in log]
     log = [dict(zip(GIT_COMMIT_FIELDS, row)) for row in log]
-    return log
+    ids = log[-1]['id']
+    return log, ids
     
 
 
@@ -181,10 +182,9 @@ def search_api(api, proglang, dirpath):
     return api_dict, lan
 
 extension = ext(dirPath)
-log = parse_gitlog(dirPath)
-pro_name, ids = hash_id(dirPath)
+log, ids = parse_gitlog(dirPath)
+pro_name, id2 = hash_id(dirPath)
 
-print(ids)
 
 api_dict, lang = search_api(API, PROGLANG,  dirPath)
 post_fields['os'] = oss
