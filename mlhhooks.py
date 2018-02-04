@@ -76,7 +76,7 @@ def POST(url, post_fields):
 	conn = httplib.HTTPConnection(url)
 	conn.request("POST", "/hooks/push", params, headers)
 	response = conn.getresponse()
-	print response.status, response.reason
+        print response.read()
 	conn.close()
 
 try:
@@ -86,12 +86,6 @@ try:
     files = os.listdir(dirPath)
 except OSError:
     print("Os error. Fatal, quitting!")
-
-
-#if ".git" not in files:
-#    print("Not a repo")
-
-#cd: os.chdir("path")
 
 def hash_id(dirpath):
     """Hash project name with md5
@@ -103,9 +97,7 @@ def hash_id(dirpath):
     
     p = subprocess.Popen('basename `git rev-parse --show-toplevel`', shell=True,  stdout=subprocess.PIPE)
     (name, _) = p.communicate()
-    print(name)
     ids = hashlib.md5(b'name')
-    print(ids.hexdigest())
     return ids.hexdigest()
 
 
@@ -185,22 +177,7 @@ extension = ext(dirPath)
 log = parse_gitlog(dirPath)
 ids = hash_id(dirPath)
 
-print("File extension dictionary----------------")
-#print(extension)
-print("Processed git log------------------------")
-#print(log)
-#print(ids)
-
-#POST(url, post_fields)
-
 api_dict, lang = search_api(API, PROGLANG,  dirPath)
-print("Used api:")
-print(api_dict)
-print("Used programming language:")
-print(lang)
-print("On os: ", oss)
-print("With distro: ", dist)
-#posting jsons:
 post_fields['OS'] = oss
 post_fields['distro'] = dist
 post_fields['id'] = ids
