@@ -45,6 +45,8 @@ router.get('/', function(req, res, next) {
                             newData.push(0);
                         }
                     }
+
+                    // Compute pie data
                     res.addData('charData', newData);
                     res.addData('totalCommits', totalCommits);
                     res.addData('apis', apis);
