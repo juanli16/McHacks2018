@@ -7,7 +7,7 @@
             <div class="card-body">
                 <canvas id="dashboard-chart" width="100%" height="30"></canvas>
             </div>
-            <div class="card-footer small text-muted">Total commits: </div>
+            <div class="card-footer small text-muted">Total commits: {{totalCommits}}</div>
         </div>
     </div>
     <div class="col-md-4">
@@ -30,36 +30,22 @@
             </div>
             <div class="card-body">
                 <div class="list-group top-space">
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
+                    {{#if apis}}
+                        {{#each apis}}
+                            <a href="/api/view/{{this.aid}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Company 1</h5>
+                                </div>
+                                <p class="mb-1">Used by # projects</p>
+                            </a>
+                        {{/each}}
+                    {{else}}
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">No entry found</h5>
+                            </div>
+                        </a>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -71,36 +57,22 @@
             </div>
             <div class="card-body">
                 <div class="list-group top-space">
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
+                    {{#if ides}}
+                        {{#each ides}}
+                            <a href="/ide/view/{{this.iid}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Company 1</h5>
+                                </div>
+                                <p class="mb-1">Used by # projects</p>
+                            </a>
+                        {{/each}}
+                    {{else}}
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">No entry found</h5>
+                            </div>
+                        </a>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -112,36 +84,22 @@
             </div>
             <div class="card-body">
                 <div class="list-group top-space">
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
+                    {{#if tech}}
+                        {{#each tech}}
+                            <a href="/technology/view/{{this.tid}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Company 1</h5>
+                                </div>
+                                <p class="mb-1">Used by # projects</p>
+                            </a>
+                        {{/each}}
+                    {{else}}
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">No entry found</h5>
+                            </div>
+                        </a>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -156,36 +114,22 @@
             </div>
             <div class="card-body">
                 <div class="list-group top-space">
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
-                    <a href="/api/view/" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Company 1</h5>
-                        </div>
-                        <p class="mb-1">Used by # projects</p>
-                    </a>
+                    {{#if projects}}
+                        {{#each projects}}
+                            <a href="/project/view/{{this.pid}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{this.name}}</h5>
+                                </div>
+                                <p class="mb-1">By {{# fromNow this.createdAt}}{{/fromNow}}</p>
+                            </a>
+                        {{/each}}
+                    {{else}}
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">No entry found</h5>
+                            </div>
+                        </a>
+                    {{/if}}
                 </div>
             </div>
         </div>
