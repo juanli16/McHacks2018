@@ -31,7 +31,7 @@ API = {
     }
 # grep
 TECHNOLOGY = {
-    "nodejs" : "NodeJS",
+    "nodejs" : "NodeJS",  #Look for package.json
     "django" : "Django",
     "ionic" : "Ionic",
     "angular.js" : "AngularJS",
@@ -42,7 +42,7 @@ TECHNOLOGY = {
 # find through files variable
 PROGLANG = {
 		"java" : "Java",
-		"py" : "Python",
+		#"py" : "Python",
 		"css" : "CSS",
 		"cc" : "C++",
 		"cpp": "C++",
@@ -52,7 +52,9 @@ PROGLANG = {
 		"html": "HTML",
 		"pl": "Perl",
 		"sh": "Shell",
-		"swift": "Swift"
+		"swift": "Swift",
+                "cgi" : "CGI",
+                "gradle" : "Gradle"
 		}
 
 IDE = {
@@ -142,14 +144,12 @@ def parse_gitlog(dirpath):
     
 
 
-def search_api(api, dirpath):
+def search_api(api, proglang, dirpath):
     """Search each api string in all the files that has the extension in startword, the startword list will keep growing eventually.
     """
     api_dict = {}
-    for k in api.keys():
-        api_dict[k] = False
-    #startword = ['py', 'c', 'cpp', 'h', 'hpp', 'cc', 'java', 'cs', 'js', 'gradle', 'css', 'html', 'sh', 'jsp', 'pl', 'rb', 'cgi', 'asp']
-    startword = ['c', 'cpp', 'h', 'hpp', 'cc', 'java', 'cs', 'js', 'gradle', 'css', 'html', 'sh', 'jsp', 'pl', 'rb', 'cgi', 'asp']
+    startword = ['c', 'cpp', 'h', 'hpp', 'cc', 'java', 'cs', 'js', 'gradle', 'css', 'html', 'sh', 'jsp', 'pl', 'rb', 'cgi', 'asp', 'swift', 'ts']
+    #startword = proglang.keys()
     try:
         files = [(root, name) for root, dirs, files in os.walk(dirpath) for name in files if "./.git" not in root]
         files = [(p,f) for (p,f) in files for s in startword if f.endswith("."+s) ]
@@ -164,22 +164,19 @@ def search_api(api, dirpath):
                 lines = f.read()
                 for a in api[k]:
                     if a in lines:
-                        api_dict[k] = True
-   
-    #Just verifying the file extensions are good, will remove later"
-    """files = [os.path.splitext(os.path.basename(f))[1] for (p,f) in files]
+                        api_dict[k] = api[k]
+
+    #Find all the file extensions  
+    files = [os.path.splitext(os.path.basename(f))[1] for (p,f) in files]
     files = [f[1:] for f in files]
     files = filter(None, files)
     files.sort()
     dic = dict(Counter(files))
-    print(dic)
-    """
+    lan = {}
+    for k in dic.keys():
+        lan[k] = proglang[k]
 
-    a = api
-    for k in api_dict.keys():
-        if not api_dict[k]:
-            del a[k]
-    return a
+    return api_dict, lan
 
 extension = ext(dirPath)
 log = parse_gitlog(dirPath)
@@ -193,12 +190,16 @@ print("Processed git log------------------------")
 
 #POST(url, post_fields)
 
-api_dict = search_api(API, dirPath)
+api_dict, lang = search_api(API, PROGLANG,  dirPath)
 print("Used api:")
 print(api_dict)
+print("Used programming language:")
+print(lang)
 #posting jsons:
 post_fields['id'] = ids
 post_fields["commit"] = log
 post_fields["ext"] = extension
+post_fields["API"] = api_dict
+post_fields["Programming language"] = lang
 POST(url, post_fiields)
 
