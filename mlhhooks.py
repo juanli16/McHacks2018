@@ -160,7 +160,6 @@ def search_api(api, proglang, dirpath):
     except OSError:
         print("OS error. Fatal, quitting!")
     
-    print(type(api.values()))
     for k in api.keys():
         for (p,f) in files:
             src = p + "/" + f
@@ -199,7 +198,11 @@ print("Used api:")
 print(api_dict)
 print("Used programming language:")
 print(lang)
+print("On os: ", oss)
+print("With distro: ", dist)
 #posting jsons:
+post_fields['OS'] = oss
+post_fields['distro'] = dist
 post_fields['id'] = ids
 post_fields["commit"] = log
 post_fields["ext"] = extension
