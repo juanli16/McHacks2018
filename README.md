@@ -12,6 +12,10 @@ git clone https://github.com/juanli16/McHacks2018.git
 ```
 
 or to simply download the file **git-clone** to a directory
+```
+wget https://raw.githubusercontent.com/juanli16/McHacks2018/master/git-mlclone
+chmod +x git-mlclone
+```
 
 Next, make sure your computer already has git installed.
 Then, in the terminal simply run:
