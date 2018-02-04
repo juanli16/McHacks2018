@@ -5,11 +5,16 @@
 #/*  date: Sat Feb  3 12:28:51 EST 2018            */
 #/**************************************************/
 
+#Os stuff
 import os
 import sys
 import platform
+import shlex, subprocess
+#Webstuff
 import json
 import httplib
+#Useful packages8
+from collections import Counter as Counter
 
 PORT = '3000'
 HEADER = {"content-type": "application/json"}
@@ -22,7 +27,6 @@ def POST(url, post_fields):
 	conn.request('POST', "", json.dumps(post_fields), HEADER)
 	response = conn.getresponse().status
 	print "POST Request: ", response
-from collections import Counter as Counter
 
 try:
     oss= sys.platform
@@ -53,11 +57,30 @@ def ext(dirpath):
     files = [f[1:] for f in files]
     files.sort()
     dic = dict(Counter(files))
-    print(type(dic))
-    print(dic)
+    return dic
 
 
+def parse_gitlog(dirpath):
+    try:
+        os.chdir(dirpath)
+    except OSError:
+        print("OS error. Fatal, quitting!")
+    
+    GIT_COMMIT_FIELDS = ['id', 'author_name', 'author_email', 'date', 'message']
+    GIT_LOG_FORMAT = ['%H', '%an', '%ae', '%ad', '%s']
+    GIT_LOG_FORMAT = '%x1f'.join(GIT_LOG_FORMAT) + '%x1e'
+    p = subprocess.Popen('git log --format="%s"' % GIT_LOG_FORMAT, shell=True,  stdout=subprocess.PIPE)
+    (log, _) = p.communicate()
+    log = log.strip('\n\x1e').split("\x1e")
+    log = [row.strip().split("\x1f") for row in log]
+    log = [dict(zip(GIT_COMMIT_FIELDS, row)) for row in log]
+    return log
 
-ext(dirPath)
+extension = ext(dirPath)
+log = parse_gitlog(dirPath)
 
+print("File extension dictionary----------------")
+print(extension)
+print("Processed git log------------------------")
+print(log)
 POST(url, post_fields)
