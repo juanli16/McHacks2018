@@ -1,0 +1,31 @@
+<h2 class="card-title">IDEs</h2>
+<div class="col-md-12">
+    {{#if ides}}
+        {{#each ides}}
+            <div class="row">
+                {{# each this}}
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{this.name}}</h5>
+                                <p class="card-text">{{this.description}}</p>
+                                <p><small>Used by # projects</small></p>
+                                <a href="/ide/view/{{this.iid}}" class="btn btn-primary">Explore projects</a>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        {{/each}}
+    {{else}}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">There are currently no entries</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/if}}
+</div>
