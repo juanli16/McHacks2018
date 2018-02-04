@@ -58,8 +58,21 @@ router.post('/add', function(req, res, next) {
 });
 
 router.get('/json/:id(\\d+)', function(req, res, next) {
-    res.send({
-        946702811: 14
+    var data = {};
+    Project.findOne({pid: req.params.id}).populate('commits').then(function(project){
+        if(!project) {
+            res.json(data);
+        } else {
+            for(var i=0; i < project.commits.length; i++) {
+                var key = Math.round(project.commits[i].date.getTime() / 1000) + '';
+                if(key in data) {
+                    data[key] += 1;
+                } else {
+                    data[key] = 1;
+                }
+            }
+            res.json(data);
+        }
     });
 });
 
