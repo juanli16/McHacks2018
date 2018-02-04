@@ -103,9 +103,7 @@ def hash_id(dirpath):
     
     p = subprocess.Popen('basename `git rev-parse --show-toplevel`', shell=True,  stdout=subprocess.PIPE)
     (name, _) = p.communicate()
-    print(name)
     ids = hashlib.md5(b'name')
-    print(ids.hexdigest())
     return ids.hexdigest()
 
 
