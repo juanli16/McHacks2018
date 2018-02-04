@@ -80,8 +80,8 @@
     {{# if g_script.chart}}
         <script src="/vendor/chart.js/Chart.min.js"></script>
         <script>
-            var ctx = document.getElementById("dashboard-chart");
-            new Chart(ctx,{
+            var chartCTX = document.getElementById("dashboard-chart");
+            new Chart(chartCTX,{
                 type: "line",
                 data: {
                     labels: [
@@ -104,6 +104,19 @@
                     }]
                 },
                 options:{}});
+
+            // Pie
+            var pieCTX = document.getElementById("dashboard-pie");
+            pieChart= new Chart(pieCTX,{
+                type:"pie",
+                data:{
+                    labels:["Blue","Red","Yellow","Green"],
+                    datasets:[{
+                            data:[12.21,15.58,11.25,8.32],
+                            backgroundColor:["#007bff","#dc3545","#ffc107","#28a745"]
+                        }]
+                }
+            });
         </script>
     {{/if}}
 </div>
