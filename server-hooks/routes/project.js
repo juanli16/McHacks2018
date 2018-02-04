@@ -37,7 +37,7 @@ router.get('/add', function(req, res, next) {
 });
 
 router.post('/add', function(req, res, next) {
-    var body = _.pick(req.body, ['name']);
+    var body = _.pick(req.body, ['name', 'hash']);
     var project = new Project(body);
     project.save().then(function (doc) {
         res.setSuccess('Project added successfully');

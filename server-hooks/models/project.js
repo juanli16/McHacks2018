@@ -7,7 +7,12 @@ var ProjectSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    name: {
+    hash: {
+        type: String,
+        unique: true,
+        required: true
+    }
+    ,name: {
         type: String,
         required: true
     },
